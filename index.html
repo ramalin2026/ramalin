@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ramalin</title>
+</head>
+<body>
+
+<h1>🔮 Ramalin</h1>
+
+<input type="text" placeholder="Nama kamu" id="nama">
+<br><br>
+<input type="date" id="tanggal">
+<br><br>
+
+<button onclick="getRamalan()">Lihat Ramalan</button>
+
+<div id="hasil" style="margin-top:20px;"></div>
+
+<script>
+async function getRamalan() {
+  const nama = document.getElementById("nama").value;
+  const tanggal = document.getElementById("tanggal").value;
+
+  const res = await fetch("https://hook.us2.make.com/u6utubwv6nej5qt25q1owu63odsb9aol", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ nama, tanggal })
+  });
+
+  const data = await res.text();
+
+  document.getElementById("hasil").innerText = data;
+}
+</script>
+
+</body>
+</html>
